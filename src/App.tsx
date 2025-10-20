@@ -3,7 +3,7 @@ import { SimulationsGrid } from './components/SimulationsGrid';
 import { Toaster } from './components/ui/sonner';
 import Projectile from './pages/ProjectileMotion';
 // import ChemicalReactions from './pages/ChemicalReactions';
-import StaticElectricitySim from './pages/balloonAndStaticElectricity/BalloonAndStaticElectricity';
+
 import ComingSoon from './pages/ComingSoon';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<SimulationsGrid />} />
           <Route path="/pages/projectile-motion" element={<Projectile />} />
           {/* <Route path="/pages/chemical-reactions" element={<ChemicalReactions />} /> */}
-          <Route path="/pages/balloonAndStaticElectricity/balloonAndStaticElectricity" element={<StaticElectricitySim />} />
+
           <Route path="*" element={<ComingSoon />} />
         </Routes>
         <Toaster />
