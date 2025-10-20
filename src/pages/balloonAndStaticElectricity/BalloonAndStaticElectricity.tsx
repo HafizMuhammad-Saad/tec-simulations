@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 /**
  * SVG-based PhET-like Balloons & Static Electricity
@@ -19,7 +19,7 @@ const WALL = { x: VIEW_W - 90, y: 40, w: 70, h: VIEW_H - 80 };
 
 const TOTAL_COLS = 7; // charges per sweater column visually
 const TOTAL_ROWS = 9;
-const ELECTRON_TOTAL = TOTAL_COLS * TOTAL_ROWS; // number of charge positions available
+// const ELECTRON_TOTAL = TOTAL_COLS * TOTAL_ROWS; // number of charge positions available
 const TRANSFER_NEEDED = 6; // electrons required to stick
 const PROXIMITY_THRESHOLD = 160; // start induction when balloon center closer than this to sweater top center
 const RUB_SPEED_THRESHOLD = 6; // pixels per pointer move to count as rubbing
@@ -40,7 +40,7 @@ type Charge = {
   offset?: number; // arc offset
 };
 
-export default function SimulationCanvas(): JSX.Element {
+export default function SimulationCanvas(): React.JSX.Element {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   // balloon state (ref)
@@ -54,7 +54,7 @@ export default function SimulationCanvas(): JSX.Element {
     stuck: false,
   });
 
-  const [renderTick, setRenderTick] = useState(0);
+  // Removed unused renderTick state
 
   // charges on sweater (array)
   const chargesRef = useRef<Charge[]>([]);
@@ -70,7 +70,8 @@ export default function SimulationCanvas(): JSX.Element {
 
   // pointer tracking for rub detection
   const activePointerRef = useRef<number | null>(null);
-  const lastPointerPosRef = useRef<{ x: number; y: number } | null>(null);
+  type PointerPos = { x: number; y: number; moved: number };
+  const lastPointerPosRef = useRef<PointerPos | null>(null);
 
   // rAF
   const rafRef = useRef<number | null>(null);
@@ -107,7 +108,7 @@ export default function SimulationCanvas(): JSX.Element {
     wallChargesRef.current = wArr;
 
     // initial render
-    setRenderTick((v) => v + 1);
+    // setRenderTick((v) => v + 1); // Removed unused state update
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -284,7 +285,7 @@ export default function SimulationCanvas(): JSX.Element {
       const d = Math.hypot(px - b.x, py - b.y);
       if (d <= b.r + 8) {
         svg.setPointerCapture(ev.pointerId);
-        activePointerRef.current = ev.pointerId;
+        lastPointerPosRef.current = { x: px, y: py, moved: 0 };
         lastPointerPosRef.current = { x: px, y: py, moved: 0 } as any;
         b.dragging = true;
         b.vx = 0; b.vy = 0;
@@ -298,9 +299,9 @@ export default function SimulationCanvas(): JSX.Element {
       const rect = svg.getBoundingClientRect();
       const px = ev.clientX - rect.left;
       const py = ev.clientY - rect.top;
-      const last = lastPointerPosRef.current;
-      const moved = last ? Math.hypot(px - last.x, py - last.y) : 0;
-      lastPointerPosRef.current = { x: px, y: py, moved } as any;
+      // const last = lastPointerPosRef.current;
+      lastPointerPosRef.current = { x: px, y: py, moved: Math.hypot(px - lastPointerPosRef.current!.x, py - lastPointerPosRef.current!.y) };
+      lastPointerPosRef.current = { x: px, y: py,moved: Math.hypot(px - lastPointerPosRef.current!.x, py - lastPointerPosRef.current!.y) };
       const b = balloonRef.current;
       // clamp to not go inside sweater y area
       const nx = Math.max(b.r + 8, Math.min(VIEW_W - b.r - 120, px));
@@ -367,7 +368,7 @@ export default function SimulationCanvas(): JSX.Element {
   const b = balloonRef.current;
   const charges = chargesRef.current;
   const wallCharges = wallChargesRef.current;
-  const transferred = transferredCountRef.current;
+  // const transferred = transferredCountRef.current;
 
   return (
     <div className="w-full flex justify-center">
@@ -395,7 +396,7 @@ export default function SimulationCanvas(): JSX.Element {
         {/* wall (right) */}
         <rect x={WALL.x} y={WALL.y} width={WALL.w} height={WALL.h} rx={8} fill="#fff" stroke="#cbd5e1" />
         <g>
-          {wallCharges.map((c, i) => (
+          {wallCharges.map((c) => (
             <g key={c.id} transform={`translate(${c.x}, ${c.y})`}>
               <PlusMinusSymbol sign={c.sign} size={18} />
             </g>

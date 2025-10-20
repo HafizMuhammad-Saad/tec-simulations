@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SimulationCard } from './SimulationCard';
 import { simulations } from './simulationsData';
 import { categories } from './constants/categories';
 import { Input } from '../components/ui/input';
-import { Button } from '../components/ui/button';
-import { Search, Filter, Grid3X3, List } from 'lucide-react';
+// import { Button } from '../components/ui/button';
+import { Search,  Grid3X3, List } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Badge } from '../components/ui/badge';

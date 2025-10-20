@@ -1,5 +1,3 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
 import SvgImage from '../assets/img-1.svg'
 import { Button } from '../components/ui/button';
 

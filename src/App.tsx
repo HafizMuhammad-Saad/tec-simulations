@@ -1,9 +1,8 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SimulationsGrid } from './components/SimulationsGrid';
 import { Toaster } from './components/ui/sonner';
 import Projectile from './pages/ProjectileMotion';
-import ChemicalReactions from './pages/ChemicalReactions';
+// import ChemicalReactions from './pages/ChemicalReactions';
 import StaticElectricitySim from './pages/balloonAndStaticElectricity/BalloonAndStaticElectricity';
 import ComingSoon from './pages/ComingSoon';
 

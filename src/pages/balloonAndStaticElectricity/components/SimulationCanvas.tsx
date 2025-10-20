@@ -13,13 +13,8 @@ import React, { useEffect, useRef, useState } from "react";
 import balloonImg from "../assets/balloon.png";
 import sweaterImg from "../assets/sweater.png";
 // electronImg is optional; if missing, sim draws a small glowing circle
-let electronImg: string | null = null;
-try {
-  // @ts-expect-error
-  electronImg = require("../assets/electron.png").default;
-} catch (e) {
-  electronImg = null;
-}
+import electronImgSrc from "../assets/electron.png";
+const electronImg: string | null = electronImgSrc || null;
 
 /* ====== Types ====== */
 type Electron = {
@@ -59,7 +54,7 @@ const ELECTRON_TO_STICK = 6; // how many electrons must transfer to make balloon
 const TRANSFER_DURATION = 700; // ms for each electron animation
 const TRANSFER_INTERVAL = 90; // ms between starting successive electron animations
 
-export default function SimulationCanvas(): JSX.Element {
+export default function SimulationCanvas(): React.JSX.Element {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   // balloon state (ref so animation loop doesn't cause rerenders)
@@ -325,6 +320,8 @@ export default function SimulationCanvas(): JSX.Element {
           (ev.target as Element).releasePointerCapture(ev.pointerId);
         } catch (e) {
           // ignore
+          console.log(e);
+          
         }
       }
     };

@@ -1,16 +1,16 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import ControlPanel from "../components/ControlPanel";
 import { useProjectile } from "../hooks/useProjectile";
 
 const Projectile = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null!);
   const [settings, setSettings] = useState({
     velocity: 20,
     angle: 45,
     mass: 1,
     air: false,
   });
-  const { start, pause, reset, updateStats, stats, isPaused } = useProjectile(
+  const { start, pause, reset, stats, isPaused } = useProjectile(
     canvasRef,
     settings
   );
