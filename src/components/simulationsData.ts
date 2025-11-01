@@ -13,12 +13,14 @@ export const simulations: Simulation[] = [
   },
   {
     id: '2',
-    title: 'Chemical Reactions',
-    description: 'Visualize chemical reactions and bonding',
-    category: 'chemistry',
-    url: '/pages/chemical-reactions',
+    title: 'Build Fractions',
+    description: 'Visualize Math fractions',
+    category: 'math',
+    url: '/pages/build-fraction',
     difficulty: 'beginner',
-    tags: ['reactions', 'bonding', 'molecules']
+    tags: ['fractions', 'arithmetic', 'visualization'],
+    imageUrl: '/images/fractions.png'
+
   },
   {
     id: '3',

@@ -5,6 +5,7 @@ import Projectile from './pages/ProjectileMotion';
 // import ChemicalReactions from './pages/ChemicalReactions';
 
 import ComingSoon from './pages/ComingSoon';
+import BuildFractions from './pages/BuildFraction';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           {/* <Route path="/pages/chemical-reactions" element={<ChemicalReactions />} /> */}
 
           <Route path="*" element={<ComingSoon />} />
+          <Route path="/pages/build-fraction" element={<BuildFractions />} />
         </Routes>
         <Toaster />
       </div>

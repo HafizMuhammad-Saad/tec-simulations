@@ -22,7 +22,7 @@ export function SimulationCard({ simulation }: SimulationCardProps) {
 
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer border-2 hover:border-primary/20">
-        <img src={simulation.imageUrl} alt="" />
+        <img src={simulation.imageUrl} alt="" className='max-h-32'/>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-2">
